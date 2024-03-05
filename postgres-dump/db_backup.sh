@@ -1,14 +1,12 @@
 #!/bin/sh
 
-CUR_YEAR=$(date +"%Y")
-CUR_MONTH=$(date +"%m")
 CUR_DATE=$(date +"%Y-%m-%d-%H%M-%s")
 
-DB_USER=<db-user>
-DB_PASSWORD=<db-password>
-DB_NAME=<db-name>
-DB_HOST=<db-host>
-DIRECTORY=<directory-for-temp-file>
+DB_USER=#<db-user>
+DB_PASSWORD=#<db-password>
+DB_NAME=#<db-name>
+DB_HOST=#<db-host>
+DIRECTORY=#<directory-for-temp-file>
 
 DB_FILENAME=${DB_NAME}_${CUR_DATE}.gz
 DB_DUMP_PATH=${DIRECTORY}${DB_FILENAME}
@@ -29,12 +27,15 @@ PGPASSWORD=$DB_PASSWORD pg_dump -U $DB_USER -h $DB_HOST $DB_NAME | gzip > $DB_DU
 
 #  after uncomment and fill
 #
-# AWS_ACCESS_KEY=<aws_access-key>
-# AWS_SECRET=<aws-secret>
-# AWS_HOST=<aws-host>
-# AWS_HOST_BUCKET=<aws-bucket>
-# CONTAINER_NAME=<container-name>
-# PREFIX=<prefix>
+# CUR_YEAR=$(date +"%Y")
+# CUR_MONTH=$(date +"%m")
+#
+# AWS_ACCESS_KEY=#<aws_access-key>
+# AWS_SECRET=#<aws-secret>
+# AWS_HOST=#<aws-host>
+# AWS_HOST_BUCKET=#<aws-bucket>
+# CONTAINER_NAME=#<container-name>
+# PREFIX=#<prefix>
 # AWS_PATH=s3://$CONTAINER_NAME/$PREFIX/$CUR_YEAR/$CUR_MONTH/
 
 # s3cmd --host=$AWS_HOST --host-bucket=$AWS_HOST_BUCKET --access_key=$AWS_ACCESS_KEY --secret_key=$AWS_SECRET put $DB_DUMP_PATH $AWS_PATH
